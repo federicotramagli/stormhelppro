@@ -1,0 +1,737 @@
+<?php
+
+namespace SLMP\inc\fields;
+
+class acf_fields {
+
+	public function __construct() {
+        $this->slmp_acf_theme_options();
+        $this->slmp_acf_custom_theme_fields();
+        $this->slmp_acf_custom_theme_shortcode_fields();
+	}
+
+	public function slmp_acf_theme_options() {
+		if( function_exists('acf_add_options_page') ) {
+			$parent_option = acf_add_options_page(array(
+				'page_title'  => 'Dynamic Custom',
+				'menu_title'  => 'Dynamic Custom',
+				'menu_slug'   => 'dynamic-custom',
+				'capability'  => 'manage_options',
+				'redirect'    => false
+			));
+			acf_add_options_sub_page(array(
+				'page_title'  => 'Dynamic Create',
+				'menu_title'  => 'Dynamic Create',
+				'menu_slug'   => 'custom-shortcode',
+				'parent_slug' => $parent_option['menu_slug'],
+			));
+		}
+	}
+
+
+	/*
+	*	Custom CSS, Function and JS Fields
+	*/
+	public function slmp_acf_custom_theme_fields() {
+		if( function_exists('acf_add_local_field_group') ) {
+			acf_add_local_field_group(array(
+				'key' => 'slmp_custom_function',
+				'title' => 'Dynamic Custom ',
+				'fields' => array(
+					array(
+						'key' 		=> 'slmp_custom_theme_tab',
+						'label' 	=> 'Function',
+						'name' 		=> 'custom_function_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_function',
+						'name' 		=> 'custom_function',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'text/x-php',
+						'max_rows'			=> '35',
+					),
+					array(
+						'key' 		=> 'slmp_custom_theme_tab1',
+						'label' 	=> 'CSS',
+						'name' 		=> 'custom_css_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_css',
+						'name' 		=> 'custom_css',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> '',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'css',
+						'max_rows'			=> '35',
+					),
+					array(
+						'key' 		=> 'slmp_custom_theme_tab2',
+						'label' 	=> 'JS',
+						'name' 		=> 'custom_jquery_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_jquery',
+						'name' 		=> 'custom_jquery',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> '',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'javascript',
+						'max_rows'			=> '35',
+					),
+				),
+				'location' => array(
+					array(
+						array(
+							'param' => 'options_page',
+							'operator' => '==',
+							'value' => 'dynamic-custom',
+						),
+					),
+				),
+				'menu_order' 			=> 0,
+				'position' 				=> 'normal',
+				'style' 				=> 'default',
+				'label_placement' 		=> 'top',
+				'instruction_placement' => 'label',
+				'hide_on_screen' 		=> '',
+				'active' 				=> true,
+				'description' 			=> '',
+			));
+		}		
+	}
+
+	/*
+	*	Custom Shortcode, Hooks and Templates Fields
+	*/
+	public function slmp_acf_custom_theme_shortcode_fields() {
+		if( function_exists('acf_add_local_field_group') ) {
+			acf_add_local_field_group(array(
+				'key' => 'slmp_custom_shortcode',
+				'title' => 'Dynamic Shortcode/Hooks/Templates',
+				'fields' => array(
+					array(
+						'key' 		=> 'slmp_custom_hook_shortcode_tab',
+						'label' 	=> 'Shortcode',
+						'name' 		=> 'custom_hook_shortcode_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_shortcode',
+						'label' 	=> 'Shortcode Generator',
+						'name' 		=> 'shortcode_generator',
+					    'type' 		=> 'repeater',
+					    'instructions' 		=> '',
+					    'required' 			=> 0,
+					    'layout' 		=> 'block',
+					    'button_label' 	=> 'Add Shortcode',
+					    'sub_fields' 	=> array(
+					    	array(
+					            'key'	 		=> 'custom_shortcode_accordion',
+					            'label' 		=> 'Shortcode Accordion',
+					            'name' 			=> 'shortcode_accordion',
+					            'type' 			=> 'accordion',
+					            'instructions' 	=> '',
+					        ),
+					        array(
+					            'key'	 		=> 'custom_shortcode_title',
+					            'label' 		=> 'Shortcode Title',
+					            'name' 			=> 'shortcode_title',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Shortcode Title only here.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+					            'key'	 		=> 'custom_shortcode_desire',
+					            'label' 		=> 'Desired Shortcode',
+					            'name' 			=> 'shortcode_desire',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Lowercase and use underscore symbol "_" as space.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+								'key' 		=> 'custom_shortcode_content',
+								'label' 	=> 'Shortcode Content',
+								'name' 		=> 'shortcode_content',
+								'type' 		=> 'acfe_code_editor',
+								'instructions' 		=> 'Note: Always use "<strong>echo do_shortcode("[shortcode]")</strong>" to execute shortcode',
+								'required' 			=> 0,
+								'conditional_logic' => 0,
+								'placeholder' 		=> '',
+								'mode'     			=> 'text/x-php',
+								'rows'				=> '3',
+								'max_rows'			=> '15',
+							),
+					    ),
+					),
+					array(
+						'key' 		=> 'slmp_custom_hook_shortcode_tab1',
+						'label' 	=> 'Hooks Boxes',
+						'name' 		=> 'custom_hook_shortcode_tab1',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_hooks',
+						'label' 	=> 'Hook Boxes Generator',
+						'name' 		=> 'hooks_generator',
+					    'type' 		=> 'repeater',
+					    'instructions' 		=> '',
+					    'required' 			=> 0,
+					    'layout' 		=> 'block',
+					    'button_label' 	=> 'Add Hook Box',
+					    'sub_fields' 	=> array(
+					    	array(
+					            'key'	 		=> 'custom_hooks_accordion',
+					            'label' 		=> 'Hook Boxes Accordion',
+					            'name' 			=> 'hooks_accordion',
+					            'type' 			=> 'accordion',
+					            'instructions' 	=> '',
+					        ),
+					        array(
+					            'key'	 		=> 'custom_hooks_title',
+					            'label' 		=> 'Hook Title',
+					            'name' 			=> 'hook_title',
+					            'type' 			=> 'text',
+					            'instructions' 	=> '',
+					            'wrapper' => array(
+							        'width' => '20%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+					            'key'	 		=> 'custom_hooks_position',
+					            'label' 		=> 'Hook Position',
+					            'name' 			=> 'hook_position',
+					            'type' 			=> 'select',
+					            'instructions' 	=> '',
+					            'wrapper' 	=> array(
+							        'width' => '40%',
+							    ),
+							    'required' 		=> 1,
+							    'return_format' => 'value',
+							    'choices' => array(
+									'-- <head> Hooks --' 	=> array(
+										'genesis_doctype' 	=> 'genesis_doctype',
+										'genesis_title' 	=> 'genesis_title',
+										'genesis_meta' 		=> 'genesis_meta',
+										'wp_head' 			=> 'wp_head',
+									),
+									'-- Page Hooks --' 		=> array(
+										'genesis_before' 	=> 'genesis_before',
+										'genesis_after' 	=> 'genesis_after',
+									),
+									'-- Header Hooks --'			=> array(
+										'genesis_before_header' 	=> 'genesis_before_header',
+										'genesis_header' 			=> 'genesis_header',
+										'genesis_after_header' 		=> 'genesis_after_header',
+										'genesis_site_title' 		=> 'genesis_site_title',
+										'genesis_site_description' 	=> 'genesis_site_description',
+										'genesis_header_right' 		=> 'genesis_header_right',
+									),
+									'-- Content Hooks --' 						=> array(
+										'genesis_before_content_sidebar_wrap' 	=> 'genesis_before_content_sidebar_wrap',
+										'genesis_after_content_sidebar_wrap' 	=> 'genesis_after_content_sidebar_wrap',
+										'genesis_before_content' 				=> 'genesis_before_content',
+										'genesis_after_content' 				=> 'genesis_after_content',
+									),
+									'-- HTML5 Content Hooks --' 		=> array(
+										'genesis_before_entry' 			=> 'genesis_before_entry',
+										'genesis_after_entry' 			=> 'genesis_after_entry',
+										'genesis_entry_header' 			=> 'genesis_entry_header',
+										'genesis_before_entry_content' 	=> 'genesis_before_entry_content',
+										'genesis_entry_content' 		=> 'genesis_entry_content',
+										'genesis_after_entry_content' 	=> 'genesis_after_entry_content',
+										'genesis_entry_footer' 			=> 'genesis_entry_footer',
+									),
+									'-- XHTML Content Hooks --' 		=> array(
+										'genesis_before_post' 			=> 'genesis_before_post',
+										'genesis_after_post' 			=> 'genesis_after_post',
+										'genesis_before_post_title' 	=> 'genesis_before_post_title',
+										'genesis_post_title' 			=> 'genesis_post_title',
+										'genesis_after_post_title' 		=> 'genesis_after_post_title',
+										'genesis_before_post_content' 	=> 'genesis_before_post_content',
+										'genesis_post_content' 			=> 'genesis_post_content',
+										'genesis_after_post_content' 	=> 'genesis_after_post_content',
+									),
+									'-- Loop Hooks --' 				=> array(
+										'genesis_before_loop' 		=> 'genesis_before_loop',
+										'genesis_loop' 				=> 'genesis_loop',
+										'genesis_after_loop' 		=> 'genesis_after_loop',
+										'genesis_after_endwhile' 	=> 'genesis_after_endwhile',
+										'genesis_loop_else' 		=> 'genesis_loop_else',
+									),
+									'-- Comment Hooks --' 				=> array(
+										'genesis_before_comments' 		=> 'genesis_before_comments',
+										'genesis_comments' 				=> 'genesis_comments',
+										'genesis_after_comments' 		=> 'genesis_after_comments',
+										'genesis_list_comments' 		=> 'genesis_list_comments',
+										'genesis_before_pings' 			=> 'genesis_before_pings',
+										'genesis_pings' 				=> 'genesis_pings',
+										'genesis_after_pings' 			=> 'genesis_after_pings',
+										'genesis_before_comment' 		=> 'genesis_before_comment',
+										'genesis_after_comment' 		=> 'genesis_after_comment',
+										'genesis_before_comment_form' 	=> 'genesis_before_comment_form',
+										'genesis_comment_form' 			=> 'genesis_comment_form',
+										'genesis_after_comment_form' 	=> 'genesis_after_comment_form',
+									),
+									'-- Sidebar Hooks --' 							=> array(
+										'genesis_sidebar' 							=> 'genesis_sidebar',
+										'genesis_before_sidebar_widget_area' 		=> 'genesis_before_sidebar_widget_area',
+										'genesis_after_sidebar_widget_area' 		=> 'genesis_after_sidebar_widget_area',
+										'genesis_sidebar_alt' 						=> 'genesis_sidebar_alt',
+										'genesis_before_sidebar_alt_widget_area' 	=> 'genesis_before_sidebar_alt_widget_area',
+										'genesis_after_sidebar_alt_widget_area' 	=> 'genesis_after_sidebar_alt_widget_area',
+									),
+									'-- Footer Hooks --' 				=> array(
+										'genesis_before_footer' 		=> 'genesis_before_footer',
+										'genesis_footer' 				=> 'genesis_footer',
+										'genesis_after_footer' 			=> 'genesis_after_footer',
+										'wp_footer' 					=> 'wp_footer',
+									),
+									'-- EZ Home Hooks --' 					=> array(
+										'dynamik_hook_before_ez_home' 		=> 'dynamik_hook_before_ez_home',
+										'dynamik_hook_home' 				=> 'dynamik_hook_home',
+										'dynamik_hook_after_ez_home' 		=> 'dynamik_hook_after_ez_home',
+									),
+								)
+					        ),
+					        array(
+					            'key'	 		=> 'custom_hooks_priority',
+					            'label' 		=> 'Hook Priority',
+					            'name' 			=> 'hook_priority',
+					            'type' 			=> 'text',
+					            'instructions' 	=> '',
+					            'wrapper' 		=> array(
+							        'width' 	=> '20%',
+							    ),
+							    'placeholder' 	=> '10',
+					        ),
+					        array(
+					            'key'	 		=> 'custom_hooks_activate',
+					            'label' 		=> 'Activate Hook',
+					            'name' 			=> 'hooks_activate',
+					            'type' 			=> 'true_false',
+					            'instructions' 	=> '',
+					            'wrapper' 		=> array(
+							        'width' 	=> '20%',
+							    ),
+							    'ui' 			=> 1,
+							    'default_value' => 0
+					        ),
+					        array(
+								'key' 		=> 'custom_hooks_statement',
+								'label' 	=> 'Conditional Statemant',
+								'name' 		=> 'hooks_statement',
+							    'type' 		=> 'repeater',
+							    'instructions' 		=> '',
+							    'required' 			=> 0,
+							    'layout' 		=> 'table',
+							    'button_label' 	=> 'Add Condition',
+							    'required' => 0,
+							    'sub_fields' 	=> array(
+					        		array(
+							            'key'	 		=> 'hook_selected_statement',
+							            'name' 			=> 'selected_statement',
+							            'type' 			=> 'select',
+							            'instructions' 	=> '',
+									    'required' => 0,
+									    'choices' => array(
+									    	'is_front_page' 	=> 'is_front_page',
+									    	'is_page' 			=> 'is_page',
+									    	'is_single' 		=> 'is_post',
+									    	'is_archive' 		=> 'is_archive',
+									    	'is_category' 		=> 'is_category',
+									    	'!is_front_page' 	=> 'is_not_front_page',
+									    	'!is_archive' 		=> 'is_not_archive',
+									    	'!is_category' 		=> 'is_not_category',
+									    	'!is_page' 			=> 'is_not_page',
+									    	'!is_single' 		=> 'is_not_post',
+									    ),
+									    'return_format' => 'value',
+									    'wrapper' 	=> array(
+									        'width' => '100%',
+									    ),
+							        ),
+							        array(
+							            'key'	 		=> 'hook_selected_page',
+							            'name' 			=> 'selected_page',
+							            'type' 			=> 'post_object',
+							            'instructions' 	=> '',
+									    'return_format' => 'id',
+									    'allow_null' => 1,
+									    'conditional_logic' => array (
+											array (
+												array (
+													'field' 		=> 'hook_selected_statement',
+													'operator' 		=> '==',
+													'value' 		=> 'is_page',
+												),
+											),
+										),
+    									'multiple' => 1,
+    									'post_type' => array(
+    										'post_type' => 'page',
+    									),
+							        ),
+							        array(
+							            'key'	 		=> 'hook_selected_not_page',
+							            'name' 			=> 'selected_not_page',
+							            'type' 			=> 'post_object',
+							            'instructions' 	=> '',
+									    'return_format' => 'id',
+									    'allow_null' => 1,
+									    'conditional_logic' => array (
+											array (
+												array (
+													'field' 		=> 'hook_selected_statement',
+													'operator' 		=> '==',
+													'value' 		=> '!is_page',
+												),
+											),
+										),
+    									'multiple' => 1,
+    									'post_type' => array(
+    										'post_type' => 'page',
+    									),
+							        ),
+							    ),
+						    ),
+		
+					        array(
+								'key' 		=> 'custom_hooks_content',
+								'label' 	=> 'Hook Box Content',
+								'name' 		=> 'hook_content',
+								'type' 		=> 'acfe_code_editor',
+								'instructions' 		=> 'Note: Always use "<strong>echo do_shortcode("[shortcode]")</strong>" to execute shortcode',
+								'required' 			=> 0,
+								'conditional_logic' => 0,
+								'placeholder' 		=> '',
+								'mode'     			=> 'text/x-php',
+								'rows'				=> '3',
+								'max_rows'			=> '15',
+							),
+					    ),
+					),
+					array(
+						'key' 		=> 'slmp_custom_template_tab',
+						'label' 	=> 'Page Templates',
+						'name' 		=> 'custom_template_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_template',
+						'label' 	=> 'Page Template Generator',
+						'name' 		=> 'template_generator',
+					    'type' 		=> 'repeater',
+					    'instructions' 		=> '',
+					    'required' 			=> 0,
+					    'layout' 		=> 'block',
+					    'button_label' 	=> 'Add Page Template',
+					    'sub_fields' 	=> array(
+					    	array(
+					            'key'	 		=> 'template_selected_page',
+					            'label' 		=> 'Display Page',
+					            'name' 			=> 'selected_page',
+					            'type' 			=> 'post_object',
+					            'instructions' 	=> 'Note: Select page where to display the template.',
+							    'return_format' => 'id',
+							    'allow_null' => 1,
+								'multiple' => 1,
+								'post_type' => array(
+									'post_type' => 'page',
+								),
+					        ),
+					        array(
+					            'key'	 		=> 'custom_template_name',
+					            'label' 		=> 'Template Name',
+					            'name' 			=> 'template_name',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Template Name only here.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+					            'key'	 		=> 'custom_template_filename',
+					            'label' 		=> 'Template Filename',
+					            'name' 			=> 'template_filename',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Lowercase and use dash symbol "-" as space.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+								'key' 		=> 'custom_template_content',
+								'label' 	=> 'Template Content',
+								'name' 		=> 'template_content',
+								'type' 		=> 'acfe_code_editor',
+								'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+								'required' 			=> 0,
+								'conditional_logic' => 0,
+								'placeholder' 		=> '',
+								'mode'     			=> 'text/x-php',
+								'rows'				=> '3',
+								'max_rows'			=> '15',
+							),
+					    ),
+					),
+					array(
+						'key' 		=> 'slmp_acf_block_template_tab',
+						'label' 	=> 'ACF Block Template',
+						'name' 		=> 'acf_block_template_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_acf_block_template',
+						'label' 	=> 'ACF Block Template Generator',
+						'name' 		=> 'acf_block_template_generator',
+					    'type' 		=> 'repeater',
+					    'instructions' 		=> '',
+					    'required' 			=> 0,
+					    'layout' 		=> 'block',
+					    'button_label' 	=> 'Add ACF Block Template',
+					    'sub_fields' 	=> array(
+					        array(
+					            'key'	 		=> 'acf_block_template_name',
+					            'label' 		=> 'ACF Block Name',
+					            'name' 			=> 'acf_block_name',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Block Name only here.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+					            'key'	 		=> 'acf_block_template_filename',
+					            'label' 		=> 'ACF Block Function Name',
+					            'name' 			=> 'acf_block_filename',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Lowercase and use underscore symbol "_" as space.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+								'key' 		=> 'acf_block_template_content',
+								'label' 	=> 'Template Content',
+								'name' 		=> 'acf_block_content',
+								'type' 		=> 'acfe_code_editor',
+								'instructions' 		=> 'Note: Use render callback function in ACF Block. Callback function is the ACF Block Function Name',
+								'required' 			=> 0,
+								'conditional_logic' => 0,
+								'placeholder' 		=> '',
+								'mode'     			=> 'text/x-php',
+								'rows'				=> '3',
+								'max_rows'			=> '15',
+							),
+					    ),
+					),
+					array(
+						'key' 		=> 'slmp_custom_404_tab',
+						'label' 	=> '404 Page Template',
+						'name' 		=> 'custom_404_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'custom_404_content',
+						'label' 	=> '404 Page Content Template',
+						'name' 		=> '404_content',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'text/x-php',
+						'rows'				=> '3',
+						'max_rows'			=> '25',
+					),
+					array(
+						'key' 		=> 'slmp_custom_search_tab',
+						'label' 	=> 'Search Page Template',
+						'name' 		=> 'custom_search_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'custom_search_content',
+						'label' 	=> 'Search Page Content Template',
+						'name' 		=> 'search_content',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'text/x-php',
+						'rows'				=> '3',
+						'max_rows'			=> '25',
+					),
+					array(
+						'key' 		=> 'slmp_custom_archive_tab',
+						'label' 	=> 'Custom Archive Page Template',
+						'name' 		=> 'custom_archive_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'custom_archive_content',
+						'label' 	=> 'Archive Page Content Template',
+						'name' 		=> 'archive_content',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'text/x-php',
+						'rows'				=> '3',
+						'max_rows'			=> '25',
+					),
+					array(
+						'key' 		=> 'slmp_custom_single_tab',
+						'label' 	=> 'Custom Single Post Template',
+						'name' 		=> 'custom_single_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'custom_single_content',
+						'label' 	=> 'Single Post Content Template',
+						'name' 		=> 'single_content',
+						'type' 		=> 'acfe_code_editor',
+						'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+						'required' 			=> 0,
+						'conditional_logic' => 0,
+						'placeholder' 		=> '',
+						'mode'     			=> 'text/x-php',
+						'rows'				=> '3',
+						'max_rows'			=> '25',
+					),
+					array(
+						'key' 		=> 'slmp_custom_taxonomy_tab',
+						'label' 	=> 'Taxonomy Templates',
+						'name' 		=> 'custom_taxonomy_tab',
+						'type' 		=> 'tab',
+						'placement' => 'left',
+						'endpoint' 	> 0,
+					),
+					array(
+						'key' 		=> 'slmp_theme_custom_taxonomy',
+						'label' 	=> 'Taxonomy Generator',
+						'name' 		=> 'taxonomy_generator',
+					    'type' 		=> 'repeater',
+					    'instructions' 		=> '',
+					    'required' 			=> 0,
+					    'layout' 		=> 'block',
+					    'button_label' 	=> 'Add Taxonomy',
+					    'sub_fields' 	=> array(
+					    	array(
+					            'key'	 		=> 'taxonomy_selected_page',
+					            'label' 		=> 'Select Taxonomy',
+					            'name' 			=> 'selected_taxonomy',
+					            'type' 			=> 'acfe_taxonomies',
+					            'instructions' 	=> 'Note: Select taxonomy where to display.',
+							    'return_format' => '',
+							    'allow_null' => 1,
+								'multiple' => 0,
+								'field_type' => 'select',
+					        ),
+					        array(
+					            'key'	 		=> 'custom_taxonomy_name',
+					            'label' 		=> 'Taxonomy Name',
+					            'name' 			=> 'taxonomy_name',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Taxonomy Name only here.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+					            'key'	 		=> 'custom_taxonomy_filename',
+					            'label' 		=> 'Taxonomy Filename',
+					            'name' 			=> 'taxonomy_filename',
+					            'type' 			=> 'text',
+					            'instructions' 	=> 'Note: Lowercase and use dash symbol "-" as space.',
+					            'wrapper' 	=> array(
+							        'width' => '50%',
+							    ),
+							    'required' => 1,
+					        ),
+					        array(
+								'key' 		=> 'custom_taxonomy_content',
+								'label' 	=> 'Taxonomy Content',
+								'name' 		=> 'taxonomy_content',
+								'type' 		=> 'acfe_code_editor',
+								'instructions' 		=> 'Note: Always add " <strong>php tag</strong> " on the first line of the field.',
+								'required' 			=> 0,
+								'conditional_logic' => 0,
+								'placeholder' 		=> '',
+								'mode'     			=> 'text/x-php',
+								'rows'				=> '3',
+								'max_rows'			=> '15',
+							),
+					    ),
+					),
+				),
+				'location' => array(
+					array(
+						array(
+							'param' => 'options_page',
+							'operator' => '==',
+							'value' => 'custom-shortcode',
+						),
+					),
+				),
+				'menu_order' 			=> 0,
+				'position' 				=> 'normal',
+				'style' 				=> 'default',
+				'label_placement' 		=> 'top',
+				'instruction_placement' => 'label',
+				'hide_on_screen' 		=> '',
+				'active' 				=> true,
+				'description' 			=> '',
+			));
+		}		
+	}
+
+
+}

@@ -1,0 +1,152 @@
+.acf-field-taxonomy-selected-page select option {
+    display: none;
+}
+.acf-field-taxonomy-selected-page select option:nth-child(n + 5) {
+    display: block;
+}
+.acf-field-taxonomy-selected-page select option:first-child() {
+    display: block;
+}
+.acf-fields .CodeMirror {
+    background: #1c1c1c !important;
+    color: #d4d4d4 !important;
+}
+div#acf-slmp_custom_function .acf-fields div.CodeMirror-selected,
+div#acf-slmp_custom_shortcode .acf-fields div.CodeMirror-selected {
+    background: rgba(252, 69, 133, 0.3) !important;
+}
+.acf-fields .CodeMirror-selectedtext,
+.acf-fields .CodeMirror-selected,
+.acf-fields .CodeMirror-line::selection,
+.acf-fields .CodeMirror-line > span::selection,
+.acf-fields .CodeMirror-line > span > span::selection,
+.acf-fields .CodeMirror-line::-moz-selection,
+.acf-fields .CodeMirror-line > span::-moz-selection,
+.acf-fields .CodeMirror-line > span > span::-moz-selection {
+    background: rgba(252, 67, 132, 0.47) !important;
+}
+.acf-fields .CodeMirror pre {
+    padding-left: 0px !important;
+}
+.acf-fields .CodeMirror-gutters {
+    background: #1c1c1c !important;
+    border-right: 0px !important;
+}
+.acf-fields .CodeMirror-linenumber {
+    color: #777777 !important;
+    padding-right: 10px !important;
+}
+.acf-fields .CodeMirror-activeline .CodeMirror-linenumber.CodeMirror-gutter-elt {
+    background: #1c1c1c !important;
+    color: #fc4384 !important;
+}
+.acf-fields .CodeMirror-linenumber {
+    color: #777 !important;
+}
+.acf-fields .CodeMirror-cursor {
+    border-left: 2px solid #ffffff !important;
+}
+.acf-fields .cm-searching {
+    background: rgba(243, 155, 53, 0.3) !important;
+    outline: 1px solid #f39b35 !important;
+}
+.acf-fields .cm-searching.CodeMirror-selectedtext {
+    background: rgba(243, 155, 53, 0.7) !important;
+    color: white !important;
+}
+.acf-fields .cm-keyword {
+    color: #e52742 !important;
+}
+.acf-fields .cm-atom {
+    color: #f39b35 !important;
+}
+.acf-fields .cm-number,
+.acf-fields span.cm-type {
+    color: #a06fca !important;
+}
+.acf-fields .cm-def {
+    color: #3dcb26 !important;
+}
+.acf-fields .cm-property,
+.acf-fields span.cm-variable {
+    color: #d4d4d4 !important;
+    font-style: italic !important;
+}
+.acf-fields span.cm-variable-2 {
+    color: #7abdff !important;
+    font-style: italic !important;
+}
+.acf-fields span.cm-variable-3 {
+    color: #ffffff !important;
+}
+.acf-fields .cm-type.cm-def {
+    color: #fc4384 !important;
+    font-style: normal !important;
+    text-decoration: underline !important;
+}
+.acf-fields .cm-property.cm-def {
+    color: #fc4384 !important;
+    font-style: normal !important;
+}
+.acf-fields .cm-callee {
+    color: #fc4384 !important;
+    font-style: normal !important;
+}
+.acf-fields .cm-operator {
+    color: #e52742 !important;
+}
+.acf-fields .cm-qualifier,
+.acf-fields .cm-tag {
+    color: #3dcb26 !important;
+}
+.acf-fields .cm-tag.cm-bracket {
+    color: #d4d4d4 !important;
+}
+.acf-fields .cm-attribute {
+    color: #a06fca !important;
+}
+.acf-fields .cm-comment {
+    color: #696d70 !important;
+    font-style: italic !important;
+    font-weight: normal !important;
+}
+.acf-fields .cm-comment.cm-tag {
+    color: #fc4384 !important;
+}
+.acf-fields .cm-comment.cm-attribute {
+    color: #d4d4d4 !important;
+}
+.acf-fields .cm-string {
+    color: #e6db74 !important;
+}
+.acf-fields .cm-string-2 {
+    color: #f39b35 !important;
+}
+.acf-fields .cm-meta {
+    color: #d4d4d4 !important;
+    background: inherit !important;
+}
+.acf-fields .cm-builtin {
+    color: #fc4384 !important;
+}
+.acf-fields .cm-header {
+    color: #da7dae !important;
+}
+.acf-fields .cm-hr {
+    color: #98e342 !important;
+}
+.acf-fields .cm-link {
+    color: #696d70 !important;
+    font-style: italic !important;
+    text-decoration: none !important;
+}
+.acf-fields .cm-error {
+    border-bottom: 1px solid #c42412 !important;
+}
+.acf-fields .CodeMirror-activeline-background {
+    background: #272727 !important;
+}
+.acf-fields .CodeMirror-matchingbracket {
+    outline: 1px solid grey !important;
+    color: #d4d4d4 !important;
+}

@@ -1,0 +1,206 @@
+/*
+*	Admin Gallery Layout CSS
+*/
+div#acf-slmp_gallery .postbox-header {
+    background: #264a64;
+}
+div#acf-slmp_gallery h2 {
+	color: #ffffff;
+    display: block;
+    padding: 15px 15px;
+    font-size: 20px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    line-height: 1;
+}
+div#acf-slmp_gallery h2 span {
+    display: inline-block;
+    vertical-align: middle;
+}
+div#acf-slmp_gallery .postbox-header .handle-actions button.handle-order-higher span.order-higher-indicator,
+div#acf-slmp_gallery .postbox-header .handle-actions button.handle-order-lower span.order-lower-indicator,
+div#acf-slmp_gallery .postbox-header .handle-actions button.handlediv span.toggle-indicator {
+	color: #ffffff;
+}
+div#acf-slmp_gallery  .inside.acf-fields.-top.-sidebar,
+div#acf-slmp_gallery .acf-fields.-sidebar:before {
+    background-color: #e2eff7;
+}
+div#acf-slmp_gallery .acf-fields .acf-field .acf-label {
+    padding: 5px 10px;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-bottom: 5px solid #ffffff;
+    text-transform: uppercase;
+    background: #336a90;
+}
+div#acf-slmp_gallery .acf-fields .acf-field .acf-label p.description {
+    color: #ffffff;
+    text-transform: initial;
+}
+div#acf-slmp_gallery .acf-fields .acf-field.acf-field-message .acf-input {
+    background-color: #bcd9ed;
+    color: #000000;
+    padding: 5px 15px;
+    display: block;
+}
+div#acf-slmp_gallery .acf-fields .acf-field.acf-field-message .acf-input p {
+    margin: 0;
+}
+div#acf-slmp_gallery .acf-fields > .acf-field .acf-input .acf-fields.-top.-border {
+    background: #e2eff7;
+}
+div#acf-slmp_gallery .acf-fields .acf-field .acf-table > thead > tr > th {
+    background-color: #bcd9ed;
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li {
+    margin: 0;
+    padding: 5px;
+    background-color: #ffffff;
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li label {
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px 5px;
+    background: #264a64;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input {
+    display: block;
+    min-width: 190px;
+    min-height: 190px;
+    border-radius: 0;
+    margin: 0;
+    position: relative;
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-grid,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-category,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-slide,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-navigation,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-before_after,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-before_after_slide,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-album,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-album_slide,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-album_category,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-masonry,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-video_slide,
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-video_grid {
+	background-size: cover;
+    background-repeat: no-repeat;
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-grid {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/grid-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-masonry {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/masonry-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-category {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/category-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-slide {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/slide-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-navigation {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/navigation-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-before_after {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/before-after-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-before_after_slide {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/before-after-slide-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-album {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/album-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-album_slide {
+	background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/album-slide-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-album_category {
+	background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/album-category-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-video_slide {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/video-slide-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input#acf-slmp_select_gallery-video_grid {
+    background-image: url(/wp-content/plugins/slmp-gallery/dist/admin/images/video-grid-gallery-sample-layout.jpg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input:checked:before,
+div#acf-slmp_gallery .slmp-gallery-select ul li input:hover:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.70);
+    border-radius: 0;
+    margin: 0;
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input:checked:after,
+div#acf-slmp_gallery .slmp-gallery-select ul li input:hover:after {
+	position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 20px;
+    text-transform: uppercase;
+    transform: rotate(-45deg);
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input:hover:after {
+    content: "Activate";
+}
+div#acf-slmp_gallery .slmp-gallery-select ul li input:checked:after {
+    content: "Activated";
+}
+div#acf-slmp_gallery .acf-tab-wrap.-left .acf-tab-group li a {
+    background-color: #bcd9ed;
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+}
+div#acf-slmp_gallery .acf-tab-wrap.-left .acf-tab-group li.active a,
+div#acf-slmp_gallery .acf-tab-wrap.-left .acf-tab-group li a:hover {
+    background-color: #336a90;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+div#acf-slmp_gallery .acf-tab-wrap.-left .acf-tab-group li.active a:after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 50%;
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+	width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #ffffff;
+}
+div#acf-slmp_gallery .acf-repeater tbody.ui-sortable .acf-row-handle.order {
+	background: #264a64;
+    color: #ffffff;
+    font-weight: bold;
+}
+div#acf-slmp_gallery .acf-repeater tbody.ui-sortable .acf-row-handle.remove {
+    background: #264a64;
+}
+div#acf-slmp_gallery .acf-field.acf-accordion .acf-input.acf-accordion-content > .acf-fields {
+    background: #e2eff7;
+}
+div#acf-slmp_gallery .acf-gallery .acf-gallery-attachments {
+    background: #779cb5;
+}
