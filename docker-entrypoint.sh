@@ -1,16 +1,15 @@
 #!/bin/bash
 set -e
 
-PORT="${PORT:-80}"
-sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf
-sed -i "s/<VirtualHost \*:80>/<VirtualHost *:$PORT>/" /etc/apache2/sites-available/000-default.conf
+# Set Apache port from Railway's PORT env var
+echo "export APACHE_PORT=${PORT:-80}" >> /etc/apache2/envvars
 
 echo "MySQL host: ${MYSQLHOST:-NOT_SET}"
 echo "MySQL user: ${MYSQLUSER:-NOT_SET}"
 echo "MySQL db:   ${MYSQLDATABASE:-NOT_SET}"
 
 if [ -n "$MYSQLHOST" ]; then
-    echo "Waiting for MySQL to be ready (max 60s)..."
+    echo "Waiting for MySQL (max 60s)..."
     RETRIES=20
     until mysql -h"$MYSQLHOST" -P"${MYSQLPORT:-3306}" -u"$MYSQLUSER" -p"$MYSQLPASSWORD" -e "SELECT 1" >/dev/null 2>&1; do
         RETRIES=$((RETRIES - 1))
@@ -24,7 +23,7 @@ if [ -n "$MYSQLHOST" ]; then
     TABLE_COUNT=$(mysql -h"$MYSQLHOST" -P"${MYSQLPORT:-3306}" -u"$MYSQLUSER" -p"$MYSQLPASSWORD" "$MYSQLDATABASE" -e "SHOW TABLES;" 2>/dev/null | wc -l || echo "0")
     if [ "$TABLE_COUNT" -lt 2 ]; then
         echo "Importing database..."
-        mysql -h"$MYSQLHOST" -P"${MYSQLPORT:-3306}" -u"$MYSQLUSER" -p"$MYSQLPASSWORD" "$MYSQLDATABASE" < /var/www/html/stormhelppro_com-2026-04-10-e1ea6b5.sql && echo "Database imported." || echo "Import failed, continuing..."
+        mysql -h"$MYSQLHOST" -P"${MYSQLPORT:-3306}" -u"$MYSQLUSER" -p"$MYSQLPASSWORD" "$MYSQLDATABASE" < /var/www/html/stormhelppro_com-2026-04-10-e1ea6b5.sql && echo "Database imported." || echo "Import failed."
     else
         echo "Database already populated, skipping import."
     fi
