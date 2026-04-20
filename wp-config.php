@@ -4,6 +4,7 @@ define('DB_USER',     getenv('MYSQLUSER')     ?: 'root');
 define('DB_PASSWORD', getenv('MYSQLPASSWORD') ?: '');
 define('DB_HOST',     (getenv('MYSQLHOST') ?: 'localhost') . ':' . (getenv('MYSQLPORT') ?: '3306'));
 define('DB_CHARSET',  'utf8');
+define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT);
 define('DB_COLLATE',  '');
 
 define('AUTH_KEY',         'S}A#G?ZdL=2A!||3q=sn~+!(<ZL-5HG6AJgL$y`-S@p^F|kj,$20K{:ectn;P|6C');

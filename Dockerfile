@@ -4,12 +4,13 @@ RUN apt-get update && apt-get install -y \
     libpng-dev libjpeg-dev libwebp-dev libzip-dev \
     libfreetype6-dev default-mysql-client \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install gd mysqli zip exif opcache \
-    && a2dismod mpm_event 2>/dev/null || true \
-    && a2enmod mpm_prefork rewrite
+    && docker-php-ext-install gd mysqli zip exif opcache
+
+RUN a2dismod mpm_event mpm_worker 2>/dev/null; \
+    a2enmod mpm_prefork rewrite; \
+    true
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-RUN echo 'Listen ${APACHE_PORT}' > /etc/apache2/ports.conf
 
 COPY . /var/www/html/
 
