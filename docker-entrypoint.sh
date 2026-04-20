@@ -1,6 +1,20 @@
 #!/bin/bash
 set -e
 
+# Fix MPM at runtime (Railway overwrites Apache config between build and run)
+echo "=== Fixing Apache MPM ==="
+find /etc/apache2/mods-enabled -name 'mpm_*' -delete 2>/dev/null || true
+ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load
+ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf
+echo "MPM modules enabled:"
+ls /etc/apache2/mods-enabled/mpm* 2>/dev/null
+
+# Handle Railway PORT
+if [ -n "$PORT" ] && [ "$PORT" != "80" ]; then
+    sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf
+    sed -i "s/*:80>/*:$PORT>/" /etc/apache2/sites-available/000-default.conf
+fi
+
 echo "MySQL host: ${MYSQLHOST:-NOT_SET}"
 echo "MySQL user: ${MYSQLUSER:-NOT_SET}"
 echo "MySQL db:   ${MYSQLDATABASE:-NOT_SET}"
