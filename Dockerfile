@@ -6,12 +6,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd mysqli zip exif opcache
 
-# Remove ALL MPM modules, re-enable only prefork
+# Fix MPM: remove all MPM symlinks, manually link only prefork
 RUN find /etc/apache2/mods-enabled -name 'mpm_*' -delete \
-    && a2enmod mpm_prefork rewrite
-
-# Apache listens on PORT env var
-RUN echo 'Listen ${APACHE_PORT}' > /etc/apache2/ports.conf
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
+    && a2enmod rewrite
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY . /var/www/html/

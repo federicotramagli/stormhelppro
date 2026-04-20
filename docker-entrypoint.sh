@@ -1,8 +1,11 @@
 #!/bin/bash
 set -e
 
-# Set Apache port from Railway's PORT env var
-echo "export APACHE_PORT=${PORT:-80}" >> /etc/apache2/envvars
+# Adjust Apache port if Railway sets PORT != 80
+if [ -n "$PORT" ] && [ "$PORT" != "80" ]; then
+    sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf
+    sed -i "s/*:80>/*:$PORT>/" /etc/apache2/sites-available/000-default.conf
+fi
 
 echo "MySQL host: ${MYSQLHOST:-NOT_SET}"
 echo "MySQL user: ${MYSQLUSER:-NOT_SET}"
@@ -30,7 +33,7 @@ if [ -n "$MYSQLHOST" ]; then
         echo "Database already populated, skipping import."
     fi
 else
-    echo "WARNING: MySQL variables not set, skipping DB wait."
+    echo "WARNING: MySQL variables not set."
 fi
 
 exec "$@"
