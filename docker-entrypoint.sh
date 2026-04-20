@@ -1,12 +1,6 @@
 #!/bin/bash
 set -e
 
-# Adjust Apache port if Railway sets PORT != 80
-if [ -n "$PORT" ] && [ "$PORT" != "80" ]; then
-    sed -i "s/Listen 80/Listen $PORT/" /etc/apache2/ports.conf
-    sed -i "s/*:80>/*:$PORT>/" /etc/apache2/sites-available/000-default.conf
-fi
-
 echo "MySQL host: ${MYSQLHOST:-NOT_SET}"
 echo "MySQL user: ${MYSQLUSER:-NOT_SET}"
 echo "MySQL db:   ${MYSQLDATABASE:-NOT_SET}"
@@ -17,7 +11,7 @@ if [ -n "$MYSQLHOST" ]; then
     until mysql --skip-ssl -h"$MYSQLHOST" -P"${MYSQLPORT:-3306}" -u"$MYSQLUSER" -p"$MYSQLPASSWORD" -e "SELECT 1" >/dev/null 2>&1; do
         RETRIES=$((RETRIES - 1))
         if [ "$RETRIES" -le 0 ]; then
-            echo "MySQL not reachable after 60s, starting Apache anyway..."
+            echo "MySQL not reachable after 60s, starting anyway..."
             break
         fi
         sleep 3
@@ -27,13 +21,11 @@ if [ -n "$MYSQLHOST" ]; then
     if [ "$TABLE_COUNT" -lt 2 ]; then
         echo "Importing database..."
         mysql --skip-ssl -h"$MYSQLHOST" -P"${MYSQLPORT:-3306}" -u"$MYSQLUSER" -p"$MYSQLPASSWORD" "$MYSQLDATABASE" \
-            < /var/www/html/stormhelppro_com-2026-04-10-e1ea6b5.sql \
+            < /tmp/wordpress-import.sql \
             && echo "Database imported." || echo "Import failed."
     else
         echo "Database already populated, skipping import."
     fi
-else
-    echo "WARNING: MySQL variables not set."
 fi
 
-exec "$@"
+exec docker-entrypoint.sh "$@"
